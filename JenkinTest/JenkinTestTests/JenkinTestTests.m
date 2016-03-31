@@ -7,33 +7,57 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "ViewController.h"
 
-@interface JenkinTestTests : XCTestCase
+@interface JumblifyViewControllerTests : XCTestCase
+
+@property (nonatomic) ViewController *vcToTest;
 
 @end
 
-@implementation JenkinTestTests
+@interface ViewController (Test)
 
-- (void)setUp {
+- (NSString *)reverseString:(NSString *)stringToReverse;
+- (void)doSomethingThatTakesSomeTimesWithCompletionBlock:(void (^)(NSString *))completion;
+
+@end
+
+@implementation JumblifyViewControllerTests
+
+- (void)setUp
+{
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.vcToTest = [[ViewController alloc] init];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+- (void)tearDown
+{
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testReverseString
+{
+    NSString *originalString = @"himynameisandy";
+    NSString *reversedString = [self.vcToTest reverseString:originalString];
+    NSString *expectedReversedString = @"ydnasiemanymih";
+    XCTAssertEqualObjects(expectedReversedString, reversedString, @"The reversed string did not match the expected reverse");
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
+- (void)testPerformanceReverseString
+{
+    NSString *originalString = @"himynameisandy";
     [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+        [self.vcToTest reverseString:originalString];
     }];
 }
 
+- (void)testDoSomethingThatTakesSomeTime
+{
+    XCTestExpectation *completionExpectation = [self expectationWithDescription:@"Long method"];
+    [self.vcToTest doSomethingThatTakesSomeTimesWithCompletionBlock:^(NSString *result) {
+        XCTAssertEqualObjects(@"result", result, @"Result was not correct!");
+        [completionExpectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
 @end
