@@ -498,6 +498,7 @@
 				28396DB31CACE14100F834E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28396DB41CACE14100F834E9 /* Build configuration list for PBXNativeTarget "JenkinTestTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +507,7 @@
 				28396DB61CACE14100F834E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28396DB71CACE14100F834E9 /* Build configuration list for PBXNativeTarget "JenkinTestUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +516,7 @@
 				28396DB91CACE14100F834E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
